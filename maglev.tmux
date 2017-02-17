@@ -121,8 +121,9 @@ apply_theme() {
     tmux setw -g window-status-current-format "$window_status_current_format"
     tmux set -g status-justify left
 
-    window_status_activity_fg=default
-    window_status_activity_bg=default
+    # changed
+    window_status_activity_fg=color16
+    window_status_activity_bg=color6
     window_status_activity_attr=underscore
     tmux setw -g window-status-activity-style fg=$window_status_activity_fg,bg=$window_status_activity_bg,$window_status_activity_attr
 
