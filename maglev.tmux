@@ -70,53 +70,53 @@ apply_theme() {
     session_symbol=''
 
     # panes
-    pane_border_fg=colour8 # gray
-    pane_active_border_fg=colour4 # blue
+    pane_border_fg=color8 # gray
+    pane_active_border_fg=color6 # blue
 
     tmux set -g pane-border-style fg=$pane_border_fg \; set -g pane-active-border-style fg=$pane_active_border_fg
     #uncomment for fat borders
     #tmux set -ga pane-border-style bg=$pane_border_fg \; set -ga pane-active-border-style bg=$pane_active_border_fg
 
-    display_panes_active_colour=colour4 # blue
-    display_panes_colour=colour4 # blue
-    tmux set -g display-panes-active-colour $display_panes_active_colour \; set -g display-panes-colour $display_panes_colour
+    display_panes_active_color=color6 # blue
+    display_panes_color=color6 # blue
+    tmux set -g display-panes-active-color $display_panes_active_color \; set -g display-panes-color $display_panes_color
 
     # messages
-    message_fg=colour16           # black
-    message_bg=colour11 # yellow
+    message_fg=color16           # black
+    message_bg=color220 # yellow
     message_attr=bold
     tmux set -g message-style fg=$message_fg,bg=$message_bg,$message_attr
 
-    message_command_fg=colour16   # black
-    message_command_bg=colour160  # light yellow
+    message_command_fg=color16   # black
+    message_command_bg=color11  # light yellow
     tmux set -g message-command-style fg=$message_command_fg,bg=$message_command_bg,$message_attr
 
     # windows mode
-    mode_fg=colour16   # black
-    mode_bg=colour11 # yellow
+    mode_fg=color16   # black
+    mode_bg=color220 # yellow
     mode_attr=bold
     tmux setw -g mode-style fg=$mode_fg,bg=$mode_bg,$mode_attr
 
     # status line
-    status_fg=colour253 # white
-    status_bg=colour0 # dark gray
+    status_fg=color253 # white
+    status_bg=color0 # dark gray
     tmux set -g status-style fg=$status_fg,bg=$status_bg
 
-    session_fg=colour16  # black
-    session_bg=colour11 # yellow
+    session_fg=color16  # black
+    session_bg=color220 # yellow
     status_left="#[fg=$session_fg,bg=$session_bg,bold] ❐ #S #[fg=$session_bg,bg=$status_bg,nobold]$left_separator_black"
     if [ x"`tmux -q -L tmux_theme_status_left_test -f /dev/null new-session -d \; show -g -v status-left \; kill-session`" = x"[#S] " ] ; then
         status_left="$status_left "
     fi
     tmux set -g status-left-length 32 \; set -g status-left "$status_left"
 
-    window_status_fg=colour8 # gray
-    window_status_bg=colour0 # dark gray
+    window_status_fg=color8 # gray
+    window_status_bg=color0 # dark gray
     window_status_format="#I #W"
     tmux setw -g window-status-style fg=$window_status_fg,bg=$window_status_bg \; setw -g window-status-format "$window_status_format"
 
-    window_status_current_fg=colour16 # black
-    window_status_current_bg=colour4 # blue
+    window_status_current_fg=color16 # black
+    window_status_current_bg=color6 # blue
     window_status_current_format="#[fg=$window_status_bg,bg=$window_status_current_bg]$left_separator_black#[fg=$window_status_current_fg,bg=$window_status_current_bg,bold] #I $left_separator #W #[fg=$window_status_current_bg,bg=$status_bg,nobold]$left_separator_black"
     tmux setw -g window-status-current-format "$window_status_current_format"
     tmux set -g status-justify left
@@ -126,24 +126,24 @@ apply_theme() {
     window_status_activity_attr=underscore
     tmux setw -g window-status-activity-style fg=$window_status_activity_fg,bg=$window_status_activity_bg,$window_status_activity_attr
 
-    window_status_bell_fg=colour11 # yellow
+    window_status_bell_fg=color220 # yellow
     window_status_bell_bg=default
     window_status_bell_attr=blink,bold
     tmux setw -g window-status-bell-style fg=$window_status_bell_fg,bg=$window_status_bell_bg,$window_status_bell_attr
 
-    window_status_last_fg=colour4 # blue
+    window_status_last_fg=color6 # blue
     window_status_last_attr=default
     tmux setw -g window-status-last-style $window_status_last_attr,fg=$window_status_last_fg
 
-    battery_full_fg=colour160   # red
-    battery_empty_fg=colour254  # white
-    battery_bg=colour160        # black
-    time_date_fg=colour8      # gray
-    time_date_bg=colour0 # dark gray
-    whoami_fg=colour254         # white
-    whoami_bg=colour160         # red
-    host_fg=colour16            # black
-    host_bg=colour254           # white
+    battery_full_fg=color160   # red
+    battery_empty_fg=color254  # white
+    battery_bg=color160        # black
+    time_date_fg=color8      # gray
+    time_date_bg=color0 # dark gray
+    whoami_fg=color254         # white
+    whoami_bg=color160         # red
+    host_fg=color16            # black
+    host_bg=color254           # white
     status_right="︎#[fg=$time_date_fg,nobold]#{prefix_highlight} $right_separator %R $right_separator %a %d %b #[fg=$host_bg]"
 
     # Only show solid separator if CPU or Battery are to be displayed
@@ -167,8 +167,8 @@ apply_theme() {
     tmux set -g status-right-length 64 \; set -g status-right "$status_right"
 
     # clock
-    clock_mode_colour=colour4 # blue
-    tmux setw -g clock-mode-colour $clock_mode_colour
+    clock_mode_color=color6 # blue
+    tmux setw -g clock-mode-color $clock_mode_color
 }
 
 circled_digit() {
@@ -253,7 +253,7 @@ battery() {
         fi
     fi
 
-    if echo $battery_palette | grep -q -E '^(colour[0-9]{1,3},?){3}$'; then
+    if echo $battery_palette | grep -q -E '^(color[0-9]{1,3},?){3}$'; then
         battery_full_fg=$(echo $battery_palette | cut -d, -f1)
         battery_empty_fg=$(echo $battery_palette | cut -d, -f2)
         battery_bg=$(echo $battery_palette | cut -d, -f3)
@@ -266,9 +266,9 @@ battery() {
         [ $empty -gt 0 ] && \
         printf '#[fg=%s,bg=%s]' $battery_empty_fg $battery_bg && \
         printf "%0.s$battery_symbol_empty" $(seq 1 $empty)
-    elif echo $battery_palette | grep -q -E '^heat(,colour[0-9]{1,3})?$'; then
+    elif echo $battery_palette | grep -q -E '^heat(,color[0-9]{1,3})?$'; then
         battery_bg=$(echo $battery_palette | cut -s -d, -f2)
-        battery_bg=${battery_bg:-colour16}
+        battery_bg=${battery_bg:-color16}
         heat="233 234 235 237 239 241 243 245 247 144 143 142 184 214 208 202 196"
         heat_count=$(echo $(echo $heat | wc -w))
 
@@ -278,7 +278,7 @@ battery() {
         full=$(printf %.0f $(echo "$charge * $battery_symbol_count" | bc -l))
         printf '#[bg=%s]' $battery_bg
         [ $full -gt 0 ] && \
-        printf "#[fg=colour%s]$battery_symbol_full" $(echo $heat | cut -d' ' -f1-$full)
+        printf "#[fg=color%s]$battery_symbol_full" $(echo $heat | cut -d' ' -f1-$full)
         empty=$(($battery_symbol_count - $full))
         if [ x"$battery_symbol" = x"heart" ]; then
         [ $empty -gt 0 ] && \
@@ -286,7 +286,7 @@ battery() {
             printf "%0.s$battery_symbol_empty" $(seq 1 $empty)
         else
         [ $empty -gt 0 ] && \
-            printf "#[fg=colour%s]$battery_symbol_empty" $(echo $heat | cut -d' ' -f$((full+1))-$(($full + $empty)))
+            printf "#[fg=color%s]$battery_symbol_empty" $(echo $heat | cut -d' ' -f$((full+1))-$(($full + $empty)))
         fi
     fi
 }
